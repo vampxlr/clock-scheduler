@@ -1,22 +1,77 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Clock Scheduler</title>
+<canvas id="myCan" width="640" height="480"></canvas>
 
-    <style>
-        #myCan{
-            border:1px solid black;
-            background-color: rgba(142, 0, 30, 0.6);
+<script>
+
+    window.onload = function () {
+
+        var canvas = document.getElementById('myCan');
+
+        var ctx = canvas.getContext('2d');
+
+        canvas.addEventListener('mousemove', clickdraw);
+
+        var canvasWidth = canvas.width;
+
+        var canvasHeight = canvas.height;
+
+        var myx = 50;
+
+        var myy = 200;
+
+        var myr = 50;
+
+        var x = 300;
+
+        var y = 200;
+
+        function clickdraw() {
+
+            x = event.clientX;
+
+            y = event.clientY;
+
+            draw();
+
         }
-    </style>
-</head>
-<body>
-    <canvas id="myCan" height="480" width="600">
 
-    </canvas>
-</body>
-<script src="scripts.min.js"></script>
-</html>
+        function draw() {
 
+            ctx.beginPath();
 
+            if (x < myx) {
+
+                myx = myx - 1;
+
+            } else {
+
+                myx = myx + 1;
+
+            }
+
+            if (y < myy) {
+
+                myy = myy - 1;
+
+            } else {
+
+                myy = myy + 1;
+
+            }
+
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+            ctx.fillStyle = "red";
+
+            ctx.arc(myx, myy, myr, 0, Math.PI * 2, false);
+
+            ctx.fill();
+
+            ctx.closePath();
+
+            window.requestAnimationFrame(draw);
+
+        }
+
+    }
+
+</script>
